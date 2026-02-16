@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KindWords Dictionary</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f9ff;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2a9d8f;
+            text-align: center;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            margin: 20px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: #2a9d8f;
+        }
+
+        .result-card {
+            border-left: 5px solid #2a9d8f;
+            padding: 15px;
+            background: #f9f9f9;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .word-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #264653;
+        }
+
+        .synonyms {
+            font-style: italic;
+            color: #666;
+        }
+
+        #no-result {
+            text-align: center;
+            color: #999;
+            margin-top: 20px;
+        }
+
+
+        #questions{
+            text-align: center;
+            text-transform:capitalize;
+            text-shadow: 2px 1px #264653;
+            text-decoration-line: overline;
+            color:#333;
+        }
+
+        #questions3{
+           text-decoration-line: underline;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>KindWords Dictionary</h1>
+        <p>Search for a positive trait to find ways to describe the good in people and things.</p>
+
+        <input type="text" id="searchInput" class="search-box"
+            placeholder="Search for a kind word (e.g., Friendly, Smart)..." onkeyup="searchDictionary()">
+
+        <div id="dictionaryResults">
+            <div class="result-card" data-word="friendly">
+                <div class="word-title">Friendly</div>
+                <p>Definition: Showing kindly interest and goodwill.</p>
+                <p class="synonyms">Synonyms: Amiable, Cordial, Neighborly, Warm-hearted</p>
+            </div>
+
+            <div class="result-card" data-word="smart">
+                <div class="word-title">Smart</div>
+                <p>Definition: Having or showing a quick-witted and bright mind.</p>
+                <p class="synonyms">Synonyms: Brilliant, Insightful, Astute, Perceptive</p>
+            </div>
+
+            <div class="result-card" data-word="brave">
+                <div class="word-title">Brave</div>
+                <p>Definition: Ready to face and endure danger or pain; showing courage.</p>
+                <p class="synonyms">Synonyms: Courageous, Valiant, Dauntless, Plucky</p>
+            </div>
+
+            <div class="result-card" data-word="helpful">
+                <div class="word-title">Helpful</div>
+                <p>Definition: Giving or ready to give help.</p>
+                <p class="synonyms">Synonyms: Supportive, Cooperative, Obliging, Considerate</p>
+            </div>
+        </div>
+
+        <p id="no-result">Type a word above to start spreading kindness.</p>
+    </div>
+
+
+    <div id="questions">
+<h2>What idea of love or kindness it focuses on: It focuses on spreading kind terms and words <br>
+Who the project is meant to help: It's meant to help those who want to use kind words but can't think of them <br>
+<div id="questions3">
+How the project encourages positive behavior: By spreading kind words
+</div>
+</h2>
+
+    </div>
+
+    <script>
+        function searchDictionary() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('result-card');
+            let noResult = document.getElementById('no-result');
+            let found = false;
+
+            if (input === "") {
+                for (let i = 0; i < cards.length; i++) cards[i].style.display = "none";
+                noResult.style.display = "block";
+                return;
+            }
+
+            for (let i = 0; i < cards.length; i++) {
+                let word = cards[i].getAttribute('data-word');
+                if (word.includes(input)) {
+                    cards[i].style.display = "block";
+                    found = true;
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+
+            noResult.style.display = found ? "none" : "block";
+            if (!found) noResult.innerText = "Word not found. Try 'Friendly' or 'Brave'!";
+        }
+    </script>
+
+</body>
+
+</html>
